@@ -2,14 +2,39 @@
 <html>
 <head>
     <title>Toutes les questions</title>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet"/>
+    <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.1/slate/bootstrap.min.css" rel="stylesheet"/>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <h1>Toutes les questions</h1>
-    <table>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <ul class="nav">
+            <li><a href="/questions">Voir toutes les questions</a></li>
+            <li><a href="/nouvelle-question">Créer une nouvelle question</a></li>
+        </ul>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<div class="container">
+    <div class="row-fluid">
+        <div class="span12">
+            <h1>Toutes les questions</h1>
+            <table class="table">
+                <tr>
+                    <th>Libellé</th>
+                </tr>
+                <tr th:each="question : ${questions}">
+                    <td><a href="" th:href="'/questions/' + ${question.id}" th:text="${question.libellé}">Libellé</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
 
-        <tr th:each="question : ${questions}">
-            <td><a href="" th:href="'/questions/' + ${question.id}" th:text="${question.libellé}">Libellé</a></td>
-        </tr>
-    </table>
 </body>
 </html>

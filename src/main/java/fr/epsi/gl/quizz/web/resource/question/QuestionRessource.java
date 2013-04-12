@@ -1,7 +1,8 @@
 package fr.epsi.gl.quizz.web.resource.question;
 
-import fr.epsi.gl.quizz.domaine.Entrepots;
-import fr.epsi.gl.quizz.domaine.question.Question;
+import com.google.inject.Inject;
+import fr.epsi.gl.quizz.requete.question.DetailsQuestion;
+import fr.epsi.gl.quizz.requete.question.RechercheQuestions;
 import fr.epsi.gl.quizz.web.representation.ModeleEtVue;
 import org.restlet.resource.Get;
 import org.restlet.resource.ResourceException;
@@ -12,10 +13,15 @@ import java.util.UUID;
 public class QuestionRessource extends ServerResource
 {
 
+    @Inject
+    public QuestionRessource(RechercheQuestions recherche) {
+        this.recherche = recherche;
+    }
+
     @Override
     protected void doInit() throws ResourceException {
         UUID id = UUID.fromString(getRequestAttributes().get("id").toString());
-        question = Entrepots.questions().get(id).get();
+        question = recherche.detailsDe(id);
     }
 
     @Get
@@ -23,5 +29,6 @@ public class QuestionRessource extends ServerResource
         return ModeleEtVue.crée("/question/question").avec("question", question);
     }
 
-    private Question question;
+    private DetailsQuestion question;
+    private RechercheQuestions recherche;
 }

@@ -1,28 +1,49 @@
 <html lang="fr">
 <head>
-
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet"/>
+    <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.1/slate/bootstrap.min.css" rel="stylesheet"/>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <span>Nouvelle Question</span>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <ul class="nav">
+            <li><a href="/questions">Voir toutes les questions</a></li>
+            <li><a href="/nouvelle-question">Créer une nouvelle question</a></li>
+        </ul>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<div class="container">
+    <div class="row-fluid">
+        <div class="span12">
+            <h1>Nouvelle Question</h1>
 
-    <form action="/questions" method="post">
-        <label for="libelle">Libellé</label>
-        <input type="text" required="true" id="libelle" name="libelle"/>
-        <button type="submit">Créer la question</button>
-    </form>
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript">
-        $(function() {
-           $("form").submit(function(event) {
-               console.log("yaa");
-               var formulaire = $(this);
-               $.post(formulaire.attr("action"), formulaire.serialize(), function(data, textStatus, jqXhr) {
-                   window.location = jqXhr.getResponseHeader("Location");
+            <form action="/questions" method="post" >
+                <label for="libelle">Libellé</label>
+                <input type="text" required="true" id="libelle" name="libelle"/>
+                <br/>
+                <button type="submit" class="btn">Créer la question</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("form").submit(function (event) {
+            console.log("yaa");
+            var formulaire = $(this);
+            $.post(formulaire.attr("action"), formulaire.serialize(), function (data, textStatus, jqXhr) {
+                window.location = jqXhr.getResponseHeader("Location");
 
-               });
-               return false;
-           });
+            });
+            return false;
         });
-    </script>
+    });
+</script>
 </body>
 </html>

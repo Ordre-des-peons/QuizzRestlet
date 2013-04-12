@@ -1,27 +1,27 @@
 package fr.epsi.gl.quizz.web.resource.question;
 
-import fr.epsi.gl.quizz.domaine.Entrepots;
-import fr.epsi.gl.quizz.domaine.question.FabriqueQuestion;
-import fr.epsi.gl.quizz.domaine.question.Question;
-import fr.epsi.gl.quizz.persistance.fake.AvecEntrepots;
+import fr.epsi.gl.quizz.requete.question.DetailsQuestion;
+import fr.epsi.gl.quizz.requete.question.RechercheQuestions;
 import fr.epsi.gl.quizz.web.representation.ModeleEtVue;
 import fr.epsi.gl.quizz.web.resource.RessourceHelper;
-import org.junit.Rule;
 import org.junit.Test;
+
+import java.util.UUID;
 
 import static org.fest.assertions.Assertions.*;
 import static org.fest.assertions.MapAssert.*;
+import static org.mockito.Mockito.*;
 
 public class QuestionRessourceTest {
 
-    @Rule
-    public AvecEntrepots entrepots = new AvecEntrepots();
-
     @Test
     public void peutAfficherLaQuestion() {
-        Question test = new FabriqueQuestion().nouvelle("test");
-        Entrepots.questions().ajoute(test);
-        QuestionRessource ressource = new QuestionRessource();
+        DetailsQuestion test = new DetailsQuestion();
+        UUID uuid = UUID.randomUUID();
+        test.setId(uuid.toString());
+        RechercheQuestions recherche = mock(RechercheQuestions.class);
+        when(recherche.detailsDe(uuid)).thenReturn(test);
+        QuestionRessource ressource = new QuestionRessource(recherche);
         RessourceHelper.initialise(ressource).avec("id", test.getId());
 
         ModeleEtVue modeleEtVue = ressource.représente();

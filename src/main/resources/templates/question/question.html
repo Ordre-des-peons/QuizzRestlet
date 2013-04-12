@@ -1,10 +1,29 @@
 <html lang="fr">
 <head>
-
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet"/>
+    <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.1/slate/bootstrap.min.css" rel="stylesheet"/>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>La belle question</h1>
-
-<h2 th:text="${question.libellé}">Libellé</h2>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <ul class="nav">
+            <li><a href="/questions">Voir toutes les questions</a></li>
+            <li><a href="/nouvelle-question">Créer une nouvelle question</a></li>
+        </ul>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<div class="container">
+    <div class="row-fluid">
+        <div class="span12">
+            <h1>Question</h1>
+            <h2 th:text="${question.libellé}">Libellé</h2>
+        </div>
+    </div>
+</div>
 </body>
 </html>

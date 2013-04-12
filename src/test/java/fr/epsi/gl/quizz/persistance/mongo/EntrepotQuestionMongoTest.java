@@ -60,7 +60,7 @@ public class EntrepotQuestionMongoTest {
     }
 
     @Test
-    @Ignore("Fongo chie ? ")
+    @Ignore
     public void peutSupprimer() {
         Question question = new FabriqueQuestion().nouvelle("Les nains portent-ils des chaussettes ?");
         entrepot.ajoute(question);
