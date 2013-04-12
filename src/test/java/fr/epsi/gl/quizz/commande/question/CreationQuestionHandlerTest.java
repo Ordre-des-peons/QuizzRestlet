@@ -7,18 +7,19 @@ import org.junit.Test;
 
 import java.util.UUID;
 
-import static org.fest.assertions.Assertions.*;
+import static org.fest.assertions.Assertions.assertThat;
 
-public class CreationQuestionCommandeTest {
+public class CreationQuestionHandlerTest {
+
 
     @Rule
     public AvecEntrepots entrepots = new AvecEntrepots();
 
     @Test
     public void peutCréerQuestion() {
-        CreationQuestionCommande commande = new CreationQuestionCommande("Ceci est une question");
+        CreationQuestionMessage commande = new CreationQuestionMessage("Ceci est une question");
 
-        UUID idQuestion = commande.execute();
+        UUID idQuestion = new CreationQuestionHandler().execute(commande);
 
         assertThat(idQuestion).isNotNull();
         assertThat(Entrepots.questions().get(idQuestion)).isNotNull();

@@ -1,7 +1,9 @@
 package fr.epsi.gl.quizz.web.resource.question;
 
+import com.google.common.util.concurrent.Futures;
 import fr.epsi.gl.quizz.commande.BusCommande;
-import fr.epsi.gl.quizz.commande.question.CreationQuestionCommande;
+import fr.epsi.gl.quizz.commande.Message;
+import fr.epsi.gl.quizz.commande.question.CreationQuestionMessage;
 import fr.epsi.gl.quizz.web.resource.RessourceHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +14,7 @@ import org.restlet.data.Status;
 
 import java.util.UUID;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class QuestionsRessourceTest {
@@ -20,6 +22,7 @@ public class QuestionsRessourceTest {
     @Before
     public void setUp() throws Exception {
         bus = mock(BusCommande.class);
+        when(bus.envoie(any(Message.class))).thenReturn(Futures.<Object>immediateFuture(UUID.randomUUID()));
         ressource = new QuestionsRessource(bus);
         RessourceHelper.initialise(ressource);
     }
@@ -31,16 +34,16 @@ public class QuestionsRessourceTest {
 
         ressource.crée(formulaire);
 
-        ArgumentCaptor<CreationQuestionCommande> capteur = ArgumentCaptor.forClass(CreationQuestionCommande.class);
-        verify(bus).execute(capteur.capture());
-        CreationQuestionCommande commande = capteur.getValue();
+        ArgumentCaptor<CreationQuestionMessage> capteur = ArgumentCaptor.forClass(CreationQuestionMessage.class);
+        verify(bus).envoie(capteur.capture());
+        CreationQuestionMessage commande = capteur.getValue();
         assertThat(commande.libellé).isEqualTo("Ceci est une question");
     }
 
     @Test
     public void peutRediriger() {
         UUID idQuestion = UUID.randomUUID();
-        when(bus.execute(any(CreationQuestionCommande.class))).thenReturn(idQuestion);
+        when(bus.envoie(any(CreationQuestionMessage.class))).thenReturn(Futures.<Object>immediateFuture(idQuestion));
 
         ressource.crée(new Form());
 

@@ -2,6 +2,7 @@ package fr.epsi.gl.quizz.web.configuration;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import fr.epsi.gl.quizz.commande.BusCommande;
 import fr.epsi.gl.quizz.commande.FournisseurMongoSession;
 import fr.epsi.gl.quizz.domaine.Entrepots;
 import fr.epsi.gl.quizz.persistance.mongo.EntrepotsMongo;
@@ -19,8 +20,8 @@ public class GuiceProductionModule extends AbstractModule{
         bind(MongoSessionManager.class).toProvider(MongoSessionManagerProvider.class).in(Singleton.class);
         bind(FournisseurMongoSession.class).to(FournisseurMongoSessionParThread.class).in(Singleton.class);
         bind(Entrepots.class).to(EntrepotsMongo.class);
+        bind(BusCommande.class).in(Singleton.class);
     }
-
 
 
     @Provides

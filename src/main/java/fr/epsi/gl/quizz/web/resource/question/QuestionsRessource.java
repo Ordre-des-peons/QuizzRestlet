@@ -1,7 +1,9 @@
 package fr.epsi.gl.quizz.web.resource.question;
 
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import fr.epsi.gl.quizz.commande.BusCommande;
-import fr.epsi.gl.quizz.commande.question.CreationQuestionCommande;
+import fr.epsi.gl.quizz.commande.question.CreationQuestionMessage;
 import org.restlet.data.Form;
 import org.restlet.data.Status;
 import org.restlet.resource.Post;
@@ -19,10 +21,10 @@ public class QuestionsRessource extends ServerResource{
 
     @Post
     public void crée(Form formulaire) {
-        CreationQuestionCommande commande = new CreationQuestionCommande(formulaire.getFirstValue("libelle"));
-        UUID idQuestion = busCommande.execute(commande);
+        CreationQuestionMessage commande = new CreationQuestionMessage(formulaire.getFirstValue("libelle"));
+        ListenableFuture<UUID> idQuestion = busCommande.envoie(commande);
         setStatus(Status.SUCCESS_ACCEPTED);
-        setLocationRef("/questions/" + idQuestion);
+        setLocationRef("/questions/" + Futures.getUnchecked(idQuestion));
     }
 
     private BusCommande busCommande;
