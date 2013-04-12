@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Toutes les questions</title>
+</head>
+<body>
+    <h1>Toutes les questions</h1>
+    <table>
+
+        <tr th:each="question : ${questions}">
+            <td><a href="" th:href="'/questions/' + ${question.id}" th:text="${question.libellé}">Libellé</a></td>
+        </tr>
+    </table>
+</body>
+</html>

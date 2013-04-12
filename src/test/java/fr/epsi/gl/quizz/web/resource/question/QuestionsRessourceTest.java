@@ -1,9 +1,13 @@
 package fr.epsi.gl.quizz.web.resource.question;
 
+import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.Futures;
 import fr.epsi.gl.quizz.commande.BusCommande;
 import fr.epsi.gl.quizz.commande.Message;
 import fr.epsi.gl.quizz.commande.question.CreationQuestionMessage;
+import fr.epsi.gl.quizz.requete.question.RechercheQuestions;
+import fr.epsi.gl.quizz.requete.question.ResumeQuestion;
+import fr.epsi.gl.quizz.web.representation.ModeleEtVue;
 import fr.epsi.gl.quizz.web.resource.RessourceHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,9 +16,11 @@ import org.restlet.data.Form;
 import org.restlet.data.Reference;
 import org.restlet.data.Status;
 
+import java.util.List;
 import java.util.UUID;
 
 import static org.fest.assertions.Assertions.*;
+import static org.fest.assertions.MapAssert.*;
 import static org.mockito.Mockito.*;
 
 public class QuestionsRessourceTest {
@@ -23,7 +29,8 @@ public class QuestionsRessourceTest {
     public void setUp() throws Exception {
         bus = mock(BusCommande.class);
         when(bus.envoie(any(Message.class))).thenReturn(Futures.<Object>immediateFuture(UUID.randomUUID()));
-        ressource = new QuestionsRessource(bus);
+        recherche = mock(RechercheQuestions.class);
+        ressource = new QuestionsRessource(bus, recherche);
         RessourceHelper.initialise(ressource);
     }
 
@@ -51,6 +58,19 @@ public class QuestionsRessourceTest {
         assertThat(ressource.getLocationRef()).isEqualTo(new Reference("http://localhost/questions/" + idQuestion));
     }
 
+    @Test
+    public void peutAfficherToutesLesQuestions() {
+        List<ResumeQuestion> questions = Lists.newArrayList();
+        when(recherche.toutes()).thenReturn(questions);
+
+        ModeleEtVue represente = ressource.represente();
+
+        assertThat(represente.getTemplate()).isEqualTo("/question/questions");
+        assertThat(represente.getData()).includes(entry("questions", questions));
+
+    }
+
     private BusCommande bus;
     private QuestionsRessource ressource;
+    private RechercheQuestions recherche;
 }

@@ -7,6 +7,7 @@ import fr.epsi.gl.quizz.commande.FournisseurMongoSession;
 import fr.epsi.gl.quizz.domaine.Entrepots;
 import fr.epsi.gl.quizz.persistance.mongo.EntrepotsMongo;
 import fr.epsi.gl.quizz.persistance.mongo.FournisseurMongoSessionParThread;
+import org.jongo.Jongo;
 import org.mongolink.MongoSessionManager;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
@@ -19,6 +20,7 @@ public class GuiceProductionModule extends AbstractModule{
     protected void configure() {
         bind(MongoSessionManager.class).toProvider(MongoSessionManagerProvider.class).in(Singleton.class);
         bind(FournisseurMongoSession.class).to(FournisseurMongoSessionParThread.class).in(Singleton.class);
+        bind(Jongo.class).toProvider(JongoProvider.class).in(Singleton.class);
         bind(Entrepots.class).to(EntrepotsMongo.class);
         bind(BusCommande.class).in(Singleton.class);
     }
