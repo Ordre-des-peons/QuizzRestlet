@@ -14,11 +14,7 @@ public class EntrepotQuestionMongo implements EntrepotQuestions {
     @Override
     public Optional<Question> get(Object id) {
         MongoSession session = fournisseur.get();
-        try {
-            return Optional.fromNullable(session.get(id, Question.class));
-        } finally {
-            fournisseur.nettoie();
-        }
+        return Optional.fromNullable(session.get(id, Question.class));
     }
 
     @Override
