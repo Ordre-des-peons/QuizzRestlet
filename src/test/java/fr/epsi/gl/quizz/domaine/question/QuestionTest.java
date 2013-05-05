@@ -34,6 +34,13 @@ public class QuestionTest {
     }
 
     @Test
+    public void peutSupprimerLaQuestion(){
+        Question question = uneQuestion();
+        question.supprimerLaQuestion();
+
+    }
+
+    @Test
     public void peutAjouterRéponseJuste() {
         Question question = uneQuestion();
 

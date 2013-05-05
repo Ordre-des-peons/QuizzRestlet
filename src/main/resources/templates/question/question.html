@@ -12,6 +12,7 @@
         <ul class="nav">
             <li><a href="/questions">Voir toutes les questions</a></li>
             <li><a href="/nouvelle-question">Créer une nouvelle question</a></li>
+            <li><a id="supprimer-question">Supprimer la question</a></li>
             <li><a href="/">Retour à l'accueil</a></li>
         </ul>
     </div>
@@ -73,6 +74,16 @@
                 }
             });
             return false;
+        });
+
+        $('#supprimer-question').click(function() {
+            $.ajax({
+                url: URL,
+                type: 'DELETE',
+                success: function(data) {
+                    window.location = '/questions';
+                }
+            });
         });
     });
 </script>
