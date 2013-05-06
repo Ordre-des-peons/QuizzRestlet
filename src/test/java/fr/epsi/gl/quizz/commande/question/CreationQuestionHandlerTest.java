@@ -16,7 +16,7 @@ public class CreationQuestionHandlerTest {
     public AvecEntrepots entrepots = new AvecEntrepots();
 
     @Test
-    public void peutCréerQuestion() {
+    public void peutCréerUneQuestion() {
         CreationQuestionMessage commande = new CreationQuestionMessage("Ceci est une question");
 
         UUID idQuestion = new CreationQuestionHandler().execute(commande);

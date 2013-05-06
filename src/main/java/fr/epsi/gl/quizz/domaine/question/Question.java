@@ -46,10 +46,6 @@ public class Question implements Aggregat{
         return réponse;
     }
 
-    public void supprimerLaQuestion() {
-
-    }
-
     private UUID id;
     private String libellé;
     private List<Reponse> réponses = Lists.newArrayList();
