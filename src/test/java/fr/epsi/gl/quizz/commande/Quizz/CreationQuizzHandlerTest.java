@@ -1,7 +1,5 @@
 package fr.epsi.gl.quizz.commande.Quizz;
 
-import fr.epsi.gl.quizz.commande.question.CreationQuestionHandler;
-import fr.epsi.gl.quizz.commande.question.CreationQuestionMessage;
 import fr.epsi.gl.quizz.domaine.Entrepots;
 import fr.epsi.gl.quizz.persistance.fake.AvecEntrepots;
 import org.junit.Rule;
