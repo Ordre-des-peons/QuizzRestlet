@@ -16,7 +16,7 @@ public class SuppressionQuestionHandler implements HandlerCommande<SuppressionQu
 
     public Boolean execute(SuppressionQuestionMessage commande){
         if(PeutTrouverLaQuestion(commande)){
-            Optional<Question> questionASupprimer = Entrepots.questions().get(commande.id);
+            Optional<Question> questionASupprimer = Entrepots.questions().get(commande._id);
             Entrepots.questions().supprime(questionASupprimer.get());
             return true;
         }
@@ -24,7 +24,7 @@ public class SuppressionQuestionHandler implements HandlerCommande<SuppressionQu
     }
 
     private boolean PeutTrouverLaQuestion(SuppressionQuestionMessage commande) {
-        return Entrepots.questions().get(commande.id).isPresent();
+        return Entrepots.questions().get(commande._id).isPresent();
     }
 
     public Class<SuppressionQuestionMessage> typeCommande() {

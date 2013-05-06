@@ -4,7 +4,6 @@ import fr.epsi.gl.quizz.domaine.Entrepots;
 import fr.epsi.gl.quizz.persistance.fake.AvecEntrepots;
 import org.junit.Test;
 import org.junit.Rule;
-import org.junit.Before;
 
 import java.util.UUID;
 

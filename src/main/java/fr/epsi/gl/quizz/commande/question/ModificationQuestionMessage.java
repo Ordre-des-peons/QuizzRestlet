@@ -7,14 +7,16 @@ import java.util.UUID;
 /**
  * Created with IntelliJ IDEA.
  * User: aroche
- * Date: 05/05/13
- * Time: 14:03
+ * Date: 06/05/13
+ * Time: 22:53
  * To change this template use File | Settings | File Templates.
  */
-public class SuppressionQuestionMessage implements Message {
+public class ModificationQuestionMessage implements Message {
     protected UUID _id;
+    protected String _libellé;
 
-    public SuppressionQuestionMessage(UUID IdQuestion) {
+    public ModificationQuestionMessage(UUID IdQuestion, String NouveauLibellé) {
         _id = IdQuestion;
+        _libellé = NouveauLibellé;
     }
 }
