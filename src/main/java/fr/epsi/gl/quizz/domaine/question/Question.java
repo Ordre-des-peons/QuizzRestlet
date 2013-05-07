@@ -17,6 +17,11 @@ public class Question implements Aggregat{
         this.id = id;
     }
 
+    public Question(String libellé) {
+        Question question = new Question();
+        question.libellé = libellé;
+    }
+
     @Override
     public UUID getId() {
         return id;

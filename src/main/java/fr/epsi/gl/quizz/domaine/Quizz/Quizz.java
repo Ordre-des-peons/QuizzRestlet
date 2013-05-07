@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import fr.epsi.gl.quizz.domaine.Aggregat;
 import fr.epsi.gl.quizz.domaine.question.Question;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,6 +34,14 @@ public class Quizz implements Aggregat {
 
     public void setLibellé(String libellé) {
         this._libellé = libellé;
+    }
+
+    public void ajouteQuestion(Question UneQuestion) {
+        questions.add(UneQuestion);
+    }
+
+    public List<Question> getQuestions() {
+        return Collections.unmodifiableList(questions);
     }
 
     private UUID _id;
