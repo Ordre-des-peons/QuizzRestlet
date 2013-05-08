@@ -17,13 +17,15 @@ import static com.google.common.base.Preconditions.checkState;
  */
 public class AjoutQuestionHandler implements HandlerCommande<AjoutQuestionMessage> {
     @Override
-    public Object execute(AjoutQuestionMessage commande) {
+    public Boolean execute(AjoutQuestionMessage commande) {
         Optional<Quizz> quizz = Entrepots.quizz().get(commande.idQuizz);
         Optional<Question> question = Entrepots.questions().get(commande.idQuestion);
-        checkState(quizz.isPresent(), "Quizz inconnue");
-        checkState(question.isPresent(), "Question inconnue");
-        quizz.get().ajouteQuestion(question.get());
-        return null;
+        if(quizz.isPresent() && question.isPresent())
+        {
+            quizz.get().ajouteQuestion(question.get());
+            return true;
+        }
+        return false;
     }
 
     @Override

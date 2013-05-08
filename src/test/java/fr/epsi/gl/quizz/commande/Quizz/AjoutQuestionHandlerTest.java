@@ -26,7 +26,7 @@ public class AjoutQuestionHandlerTest {
     public void peutAjouterUneRéponse() {
         Quizz LeQuizz = unQuizz();
         Question LaQuestion = uneQuestion();
-        AjoutQuestionMessage message = new AjoutQuestionMessage(LeQuizz.getId(),LaQuestion.getId(), "une question");
+        AjoutQuestionMessage message = new AjoutQuestionMessage(LeQuizz.getId(),LaQuestion.getId());
 
         new AjoutQuestionHandler().execute(message);
 

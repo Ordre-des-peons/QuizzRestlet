@@ -12,13 +12,11 @@ import java.util.UUID;
  * To change this template use File | Settings | File Templates.
  */
 public class AjoutQuestionMessage implements Message {
-    public AjoutQuestionMessage(UUID idQuizz,UUID idQuestion, String libellé) {
+    public AjoutQuestionMessage(UUID idQuizz,UUID idQuestion) {
         this.idQuizz = idQuizz;
         this.idQuestion = idQuestion;
-        this.libellé = libellé;
     }
 
     public final UUID idQuizz;
     public final UUID idQuestion;
-    public final String libellé;
 }
