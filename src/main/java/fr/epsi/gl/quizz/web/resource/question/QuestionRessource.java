@@ -4,14 +4,12 @@ import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import fr.epsi.gl.quizz.commande.BusCommande;
 import fr.epsi.gl.quizz.commande.question.AjoutReponseMessage;
+import fr.epsi.gl.quizz.commande.question.SuppressionQuestionMessage;
 import fr.epsi.gl.quizz.requete.question.DetailsQuestion;
 import fr.epsi.gl.quizz.requete.question.RechercheQuestions;
 import fr.epsi.gl.quizz.web.representation.ModeleEtVue;
 import org.restlet.data.Form;
-import org.restlet.resource.Get;
-import org.restlet.resource.Put;
-import org.restlet.resource.ResourceException;
-import org.restlet.resource.ServerResource;
+import org.restlet.resource.*;
 
 import java.util.UUID;
 
@@ -39,6 +37,12 @@ public class QuestionRessource extends ServerResource
     public void ajouteRéponse(Form formulaire) {
         boolean correcte = !Strings.isNullOrEmpty(formulaire.getFirstValue("correcte"));
         AjoutReponseMessage message = new AjoutReponseMessage(UUID.fromString(question.getId()), formulaire.getFirstValue("libelle"), correcte);
+        bus.envoie(message);
+    }
+
+    @Delete
+    public void supprimerQuestion() {
+        SuppressionQuestionMessage message = new SuppressionQuestionMessage(UUID.fromString(question.getId()));
         bus.envoie(message);
     }
 

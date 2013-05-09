@@ -12,7 +12,6 @@
         <ul class="nav">
             <li><a href="/questions">Voir toutes les questions</a></li>
             <li><a href="/nouvelle-question">Créer une nouvelle question</a></li>
-            <li><a id="supprimer-question">Supprimer la question</a></li>
             <li><a href="/">Retour à l'accueil</a></li>
         </ul>
     </div>
@@ -56,6 +55,13 @@
                         </fieldset>
                     </form>
                 </div>
+                <div class="span6">
+                <form id="supprimer-question" th:action="'/questions/' + ${question.id}" method="DELETE">
+                    <fieldset>
+                        <button type="submit" class="btn">Supprimer</button>
+                    </fieldset>
+                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -76,14 +82,17 @@
             return false;
         });
 
-        $('#supprimer-question').click(function() {
+        $('#supprimer-question').submit(function() {
+            var formulaire = $(this);
             $.ajax({
-                url: URL,
+                url: formulaire.attr("action"),
                 type: 'DELETE',
+                data: formulaire.serialize(),
                 success: function(data) {
                     window.location = '/questions';
                 }
             });
+            return false;
         });
     });
 </script>
