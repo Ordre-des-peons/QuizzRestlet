@@ -25,9 +25,9 @@
 <div class="container">
     <div class="row-fluid">
         <div class="span12">
-            <h1>Question</h1>
+            <h1>Quizz</h1>
 
-            <h2 th:text="${question.libellé}">Libellé</h2>
+            <h2 th:text="${quizz.libellé}">Libellé</h2>
 
             <div class="row-fluid">
                 <div class="span6">
@@ -38,31 +38,15 @@
                             <th>Correcte</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr th:each="reponse : ${question.réponses}">
-                            <td th:text="${reponse.libellé}">Libellé</td>
-                            <td th:text="${reponse.correcte}">Libellé</td>
-                        </tr>
-                        </tbody>
+
                     </table>
                 </div>
                 <div class="span6">
-                    <form id="nouvelle-reponse" th:action="'/questions/' + ${question.id}" method="PUT">
+                    <form id="supprimer-quizz" th:action="'/quizzs/' + ${quizz.id}" method="DELETE">
                         <fieldset>
-                            <legend>Nouvelle réponse</legend>
-                            <label>Libellé</label>
-                            <input type="text" required="true" name="libelle"/>
-                            <label>Correcte <input type="checkbox" name="correcte"/></label>
-                            <button type="submit" class="btn">Ajouter</button>
+                            <button type="submit" class="btn">Supprimer</button>
                         </fieldset>
                     </form>
-                </div>
-                <div class="span6">
-                <form id="supprimer-question" th:action="'/questions/' + ${question.id}" method="DELETE">
-                    <fieldset>
-                        <button type="submit" class="btn">Supprimer</button>
-                    </fieldset>
-                </form>
                 </div>
             </div>
         </div>
@@ -70,28 +54,14 @@
 </div>
 <script type="text/javascript">
     $(function () {
-        $("#nouvelle-reponse").submit(function (event) {
-            console.log("yaa");
-            var formulaire = $(this);
-            $.ajax({
-                url: formulaire.attr("action"),
-                type: 'PUT',
-                data: formulaire.serialize(),
-                success: function(data) {
-                    window.location.reload();
-                }
-            });
-            return false;
-        });
-
-        $('#supprimer-question').submit(function() {
+        $('#supprimer-quizz').submit(function() {
             var formulaire = $(this);
             $.ajax({
                 url: formulaire.attr("action"),
                 type: 'DELETE',
                 data: formulaire.serialize(),
                 success: function(data) {
-                    window.location = '/questions';
+                    window.location = '/quizzs';
                 }
             });
             return false;

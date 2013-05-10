@@ -25,13 +25,13 @@
 <div class="container">
     <div class="row-fluid">
         <div class="span12">
-            <h1>Toutes les questions</h1>
+            <h1>Tous les quizzs</h1>
             <table class="table">
                 <tr>
                     <th>Libellé</th>
                 </tr>
-                <tr th:each="question : ${questions}">
-                    <td><a href="" th:href="'/questions/' + ${question.id}" th:text="${question.libellé}">Libellé</a>
+                <tr th:each="quizz : ${quizzs}">
+                    <td><a href="" th:href="'/quizzs/' + ${quizz.id}" th:text="${quizz.libellé}">Libellé</a>
                     </td>
                 </tr>
             </table>

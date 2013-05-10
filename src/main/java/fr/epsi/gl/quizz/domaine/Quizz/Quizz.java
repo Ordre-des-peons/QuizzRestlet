@@ -21,19 +21,19 @@ public class Quizz implements Aggregat {
     }
 
     Quizz(UUID id) {
-        this._id = id;
+        this.id = id;
     }
 
     public UUID getId() {
-        return _id;
+        return id;
     }
 
     public String getLibellé() {
-        return _libellé;
+        return libellé;
     }
 
     public void setLibellé(String libellé) {
-        this._libellé = libellé;
+        this.libellé = libellé;
     }
 
     public void ajouteQuestion(Question UneQuestion) {
@@ -44,7 +44,7 @@ public class Quizz implements Aggregat {
         return Collections.unmodifiableList(questions);
     }
 
-    private UUID _id;
-    private String _libellé;
+    private UUID id;
+    private String libellé;
     private List<Question> questions = Lists.newArrayList();
 }

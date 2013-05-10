@@ -5,6 +5,9 @@ import fr.epsi.gl.quizz.web.resource.AccueilRessource;
 import fr.epsi.gl.quizz.web.resource.question.NouvelleQuestionRessource;
 import fr.epsi.gl.quizz.web.resource.question.QuestionRessource;
 import fr.epsi.gl.quizz.web.resource.question.QuestionsRessource;
+import fr.epsi.gl.quizz.web.resource.quizz.NouveauQuizzRessource;
+import fr.epsi.gl.quizz.web.resource.quizz.QuizzRessource;
+import fr.epsi.gl.quizz.web.resource.quizz.QuizzsRessource;
 import fr.epsi.gl.quizz.web.restlet.GuiceFinder;
 import org.restlet.Context;
 import org.restlet.resource.Finder;
@@ -24,6 +27,9 @@ public class QuizzRouter extends Router {
         attach("/nouvelle-question", NouvelleQuestionRessource.class);
         attach("/questions", QuestionsRessource.class);
         attach("/questions/{id}", QuestionRessource.class);
+        attach("/nouveau-quizz", NouveauQuizzRessource.class);
+        attach("/quizzs", QuizzsRessource.class);
+        attach("/quizzs/{id}", QuizzRessource.class);
     }
 
     @Override

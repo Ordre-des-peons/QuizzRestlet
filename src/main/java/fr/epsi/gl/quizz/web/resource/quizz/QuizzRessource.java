@@ -3,16 +3,12 @@ package fr.epsi.gl.quizz.web.resource.quizz;
 import com.google.inject.Inject;
 import fr.epsi.gl.quizz.commande.BusCommande;
 import fr.epsi.gl.quizz.commande.Quizz.AjoutQuestionMessage;
-import fr.epsi.gl.quizz.requete.question.DetailsQuestion;
-import fr.epsi.gl.quizz.requete.question.RechercheQuestions;
+import fr.epsi.gl.quizz.commande.Quizz.SuppressionQuizzMessage;
 import fr.epsi.gl.quizz.requete.quizz.DetailsQuizz;
 import fr.epsi.gl.quizz.requete.quizz.RechercheQuizzs;
 import fr.epsi.gl.quizz.web.representation.ModeleEtVue;
 import org.restlet.data.Form;
-import org.restlet.resource.Get;
-import org.restlet.resource.Put;
-import org.restlet.resource.ResourceException;
-import org.restlet.resource.ServerResource;
+import org.restlet.resource.*;
 
 import java.util.UUID;
 
@@ -48,9 +44,13 @@ public class QuizzRessource extends ServerResource {
         bus.envoie(message);
     }
 
+    @Delete
+    public void supprimerQuestion() {
+        SuppressionQuizzMessage message = new SuppressionQuizzMessage(UUID.fromString(quizz.getId()));
+        bus.envoie(message);
+    }
+
     private DetailsQuizz quizz;
-    private DetailsQuestion question;
-    private RechercheQuizzs RechercheQuizz;
-    private RechercheQuestions RechercheQuestion;
+    private RechercheQuizzs RechercheQuizz;;
     private BusCommande bus;
 }

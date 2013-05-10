@@ -2,6 +2,8 @@ package fr.epsi.gl.quizz.web.resource.question;
 
 import fr.epsi.gl.quizz.commande.BusCommande;
 import fr.epsi.gl.quizz.commande.question.AjoutReponseMessage;
+import fr.epsi.gl.quizz.commande.question.SuppressionQuestionMessage;
+import fr.epsi.gl.quizz.domaine.Entrepots;
 import fr.epsi.gl.quizz.requete.question.DetailsQuestion;
 import fr.epsi.gl.quizz.requete.question.RechercheQuestions;
 import fr.epsi.gl.quizz.web.representation.ModeleEtVue;
@@ -14,6 +16,7 @@ import org.restlet.data.Form;
 import java.util.UUID;
 
 import static org.fest.assertions.Assertions.*;
+import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.assertions.MapAssert.*;
 import static org.mockito.Mockito.*;
 
