@@ -30,39 +30,49 @@
             <h2 th:text="${question.libellé}">Libellé</h2>
 
             <div class="row-fluid">
-                <div class="span6">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Libellé</th>
-                            <th>Correcte</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="reponse : ${question.réponses}">
-                            <td th:text="${reponse.libellé}">Libellé</td>
-                            <td th:text="${reponse.correcte}">Libellé</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="span12">
+                    <div class="span6">
+                        <form id="nouvelle-reponse" th:action="'/questions/' + ${question.id}" method="PUT">
+                                <legend>Nouvelle réponse</legend>
+                                <label>Libellé</label>
+                                <input type="text" required="true" name="libelle"/>
+                                <label>Correcte <input type="checkbox" name="correcte"/></label>
+                                <button type="submit" class="btn">Ajouter</button>
+                        </form>
+                    </div>
+                    <div class="span6">
+                        <form id="modifier-question" th:action="'/questions/' + ${question.id}" method="POST">
+                            <fieldset>
+                                <legend>Modifier Question</legend>
+                                <label>Libellé</label>
+                                <input type="text" required="true" name="nouveau-libelle"/>
+                                <button type="submit" class="btn">Modifier</button>
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
-                <div class="span6">
-                    <form id="nouvelle-reponse" th:action="'/questions/' + ${question.id}" method="PUT">
-                        <fieldset>
-                            <legend>Nouvelle réponse</legend>
-                            <label>Libellé</label>
-                            <input type="text" required="true" name="libelle"/>
-                            <label>Correcte <input type="checkbox" name="correcte"/></label>
-                            <button type="submit" class="btn">Ajouter</button>
-                        </fieldset>
-                    </form>
-                </div>
-                <div class="span6">
-                <form id="supprimer-question" th:action="'/questions/' + ${question.id}" method="DELETE">
-                    <fieldset>
-                        <button type="submit" class="btn">Supprimer</button>
-                    </fieldset>
-                </form>
+                <div class="span12">
+                    <div class="span6">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <legend>Les réponses</legend>
+                                <th>Libellé</th>
+                                <th>Correcte</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="reponse : ${question.réponses}">
+                                <td class="reponse-libelle" th:text="${reponse.libellé}">Libellé</td>
+                                <td th:text="${reponse.correcte}">Valeur</td>
+                                <td><input class="reponse-supprimer"  type="button" value="X" title="Retirer-réponse"/></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="span6">
+                        <td><input id="supprimer-question" type="button" value="Supprimer la question" title="supprimer-question"/></td>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,6 +80,8 @@
 </div>
 <script type="text/javascript">
     $(function () {
+        var URL =  $("#nouvelle-reponse").attr('action');
+
         $("#nouvelle-reponse").submit(function (event) {
             console.log("yaa");
             var formulaire = $(this);
@@ -84,17 +96,40 @@
             return false;
         });
 
-        $('#supprimer-question').submit(function() {
-            var formulaire = $(this);
+        $('#supprimer-question').click(function() {
             $.ajax({
-                url: formulaire.attr("action"),
+                url: URL,
                 type: 'DELETE',
-                data: formulaire.serialize(),
                 success: function(data) {
                     window.location = '/questions';
                 }
             });
+        });
+
+        $("#modifier-question").submit(function (event) {
+            var formulaire = $(this);
+            $.ajax({
+                url: formulaire.attr("action"),
+                type: 'POST',
+                data: formulaire.serialize(),
+                success: function(data) {
+                    window.location.reload();
+                }
+            });
             return false;
+        });
+
+        $('.reponse-supprimer').click(function() {
+            var ligne = $(this).parent().parent();
+            var reponse = ligne.find('.reponse-libelle').html();
+            $.ajax({
+                url: URL,
+                type: 'DELETE',
+                data: reponse,
+                success: function(data) {
+                    window.location.reload();
+                }
+            });
         });
     });
 </script>

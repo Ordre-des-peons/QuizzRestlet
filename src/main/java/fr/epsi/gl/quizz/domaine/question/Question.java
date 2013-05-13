@@ -56,4 +56,16 @@ public class Question implements Aggregat{
     private List<Reponse> réponses = Lists.newArrayList();
 
 
+    public void retireRéponse(String libelléRéponse){
+        for(int compteur = 0; compteur < réponses.size(); compteur++){
+            supprimerUneRéponse(libelléRéponse, compteur);
+        }
+    }
+
+    private void supprimerUneRéponse(String libelléRéponse, int indice) {{
+            if(réponses.get(indice).getLibellé().contentEquals(libelléRéponse)){
+                réponses.remove(indice);
+            }
+        }
+    }
 }
