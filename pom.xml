@@ -66,6 +66,7 @@
             <groupId>org.mongolink</groupId>
             <artifactId>mongolink-testtools</artifactId>
             <version>0.0.14</version>
+			<scope>test</scope>
         </dependency>
     </dependencies>
     <repositories>
@@ -73,6 +74,10 @@
             <id>MongoLink</id>
             <url>http://repository-mongolink.forge.cloudbees.com/release/</url>
         </repository>
+		<repository>  
+			<id>maven-restlet</id>  
+			<name>Public online Restlet repository</name>  
+			<url>http://maven.restlet.org</url>  
+		</repository>
     </repositories>
-
 </project>
